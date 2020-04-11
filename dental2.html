@@ -125,7 +125,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>   
     <script>
     async function run(){
-        const model = model.jason;
+        const model = model.json;
         console.log(model.summary());
         const input = tf.tensor2d([1.,25.,1.,0.,0.,45.,2.8,1.5], [1,8]);
         const result = model.predict(input);
