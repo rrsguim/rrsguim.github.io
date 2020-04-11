@@ -1,0 +1,160 @@
+<!doctype html>
+<html>
+    
+  <head>
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H0NW5Z2MYC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-H0NW5Z2MYC');
+    </script>
+        
+    <title>Deep Dental</title>
+    <meta name="description" content="Uma aplicação de Machine Learning para categorização de pacientes.">
+    <meta name="keywords" content="Dentista, Deep Dental, Machine Learning, TensorFlow.js">
+    <meta name="author" content="Rafael Guimaraes">
+        
+    <style>
+      body {
+        font-family: 'Helvetica Neue', sans-serif;
+        box-sizing: border-box;
+        line-height: 1.5;
+      }
+
+      h1 {
+        margin-bottom: 30px;
+        font-size: 34px;
+      }
+
+      .description {
+        margin-bottom: 60px;
+      }
+
+      #main {
+        width: 1000px;
+        margin-top: 50px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .row {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .row:nth-of-type(2n) {
+        background: whitesmoke;
+      }
+
+      .row .text {
+        flex: 1 1 auto;
+      }
+
+      .row .label {
+        border-left: solid 1px #ccc;
+        width: 60px;
+        min-width: 60px;
+        max-width: 60px;
+      }
+
+      .row:first-of-type .label {
+        border: none;
+      }
+
+      .row:first-of-type .label, .row:first-of-type .text {
+        font-weight: bold;
+        text-transform: lowercase;
+        line-height: 1.4;
+        padding-bottom: 20px;
+      }
+
+      .positive {
+        font-weight: bold;
+        color: red;
+      }
+
+      .text, .label {
+        padding: 10px;
+      }
+
+      #classify-new-text-input {
+        border: none;
+        border-bottom: solid 1px #ccc;
+        font-size: 12px;
+        line-height: 2;
+        width: calc(100% - 950px);
+        margin-right: 15px;
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+      }
+      #classify-new-text, #classify-new-text-input {
+        display: inline-block;
+        vertical-align: top;
+      }
+
+      #classify-new-text {
+        cursor: pointer;
+        text-transform: uppercase;
+        padding: 9px 9px 9px 9px;
+        font-size: 14px;
+        border-radius: 3px;
+        letter-spacing: 1px;
+        background: #0277bd;
+        color: white;
+      }
+
+      #table-wrapper {
+        margin-bottom: 60px;
+      }
+
+      p {
+        font-weight: bold;
+      }
+   </style>
+          
+  </head>
+    
+  <body>
+
+    <!-- Tensorflow.js script -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>   
+    <script>
+    async function run(){
+        const MODEL_URL = 'http://127.0.0.1:8887/model.json';
+        const model = await tf.loadLayersModel(MODEL_URL);
+        console.log(model.summary());
+        const input = tf.tensor2d([1.,25.,1.,0.,0.,45.,2.8,1.5], [1,8]);
+        const result = model.predict(input);
+        alert(result)
+	}
+	run();
+    </script>
+
+    <div id='main'>
+      <div id="table-wrapper"></div>
+      <p>Inclua os dados do paciente nos campos abaixo.</p>
+       <div>
+        <input id="classify-new-text-input" placeholder="ID">
+        <input id="classify-new-text-input" placeholder="Nasc">
+        <input id="classify-new-text-input" placeholder="Gênero">
+        <input id="classify-new-text-input" placeholder="Primeira">
+        <input id="classify-new-text-input" placeholder="Última">
+        <input id="classify-new-text-input" placeholder="Total">
+        <input id="classify-new-text-input" placeholder="Reagenda">
+        <input id="classify-new-text-input" placeholder="Estética">
+        <input id="classify-new-text-input" placeholder="Produto +$">           
+        <div id="classify-new-text">?</div>
+      </div>
+
+    </div>
+    
+    
+  </body>
+
+
+</html>
