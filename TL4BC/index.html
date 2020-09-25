@@ -122,14 +122,13 @@
   <body>
 
     <!-- Tensorflow.js script -->
-    <!-- const MODEL_URL = 'http://127.0.0.1:8887/model.json'; -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>   
     <script>
     async function run(){
-        const MODEL_URL = 'https://rrsguim.github.io/DeepDental/model.json';
+        const MODEL_URL = 'https://rrsguim.github.io/TL4BC/model.json';
         const model = await tf.loadLayersModel(MODEL_URL);
         console.log(model.summary());
-        const input = tf.tensor2d([1.,25.,1.,0.,0.,45.,2.8,1.5], [1,8]);
+        const input = tf.tensor2d([2000-03-31,193999762500,121441496200,94.8,81.2,52.2], [0]);
         const result = model.predict(input);
         alert(result)
 	}
@@ -138,17 +137,9 @@
 
     <div id='main'>
       <div id="table-wrapper"></div>
-      <p>Inclua os dados do paciente nos campos abaixo.</p>
+      <p>Upload your data in the format xxxxxxxxxxxxxx.</p>
        <div>
-        <input id="classify-new-text-input" placeholder="ID">
-        <input id="classify-new-text-input" placeholder="Nasc">
-        <input id="classify-new-text-input" placeholder="Gênero">
-        <input id="classify-new-text-input" placeholder="Primeira">
-        <input id="classify-new-text-input" placeholder="Última">
-        <input id="classify-new-text-input" placeholder="Total">
-        <input id="classify-new-text-input" placeholder="Reagenda">
-        <input id="classify-new-text-input" placeholder="Estética">
-        <input id="classify-new-text-input" placeholder="Produto +$">           
+        <input id="classify-new-text-input" placeholder="ID">          
         <div id="classify-new-text">?</div>
       </div>
 
