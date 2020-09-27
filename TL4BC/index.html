@@ -121,19 +121,7 @@
     
   <body>
 
-    <!-- Tensorflow.js script -->
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>   
-    <script>
-    async function run(){
-        const MODEL_URL = 'https://rrsguim.github.io/TL4BC/model.json';
-        const model = await tf.loadLayersModel(MODEL_URL);
-        console.log(model.summary());
-        const input = tf.tensor2d([2000-03-31,193999762500,121441496200,94.8,81.2,52.2], [2000-06-30,194886131600,123097533000,95.4,83.4,52.8]);
-        const result = model.predict(input);
-        alert(result)
-	}
-	run();
-    </script>
+
     
 
   <!-- Begin -- Js code for upload csv and parse it client side and then plot them into console -->	  
@@ -185,7 +173,24 @@
   <input type="file" id="dealCsv"/>
 	  
   <!-- End -- Js code for upload csv and parse it client side and then plot them into console -->	  
-    
+  
+	  
+    <!-- Tensorflow.js script -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>   
+    <script>
+    async function run(){
+        const MODEL_URL = 'https://rrsguim.github.io/TL4BC/model.json';
+        const model = await tf.loadLayersModel(MODEL_URL);
+        console.log(model.summary());
+        <!-- const input = tf.tensor2d([2000-03-31,193999762500,121441496200,94.8,81.2,52.2], [2000-06-30,194886131600,123097533000,95.4,83.4,52.8]);
+        const result = model.predict(input);
+        alert(result) -->
+	}
+	run();
+    </script>	  
+	  
+	  
+	  
   </body>
 
 
