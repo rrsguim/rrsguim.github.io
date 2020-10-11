@@ -132,8 +132,8 @@
         const MODEL_URL = 'https://rrsguim.github.io/TL4BC/model.json';
         const model = await tf.loadLayersModel(MODEL_URL);
         console.log(model.summary());
-    	const input = tf.tensor(pd.DataFrame({'GDP' : [0.004559], 'Income' : [0.013544], 'Employment' : [0.006309], 'Industry' : [0.026733], 'Sales' : [0.011429]}));
-        const result = model.predict(input);
+    	const input = tf.tensor([0.0123,0.013544,0.006309,0.026733,0.011429], [1,5]);
+	const result = model.predict(input);
         alert(result)
 	}
 	run();
