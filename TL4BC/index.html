@@ -133,7 +133,7 @@
         const model = await tf.loadLayersModel(MODEL_URL);
         console.log(model.summary());
     	const input = {'GDP' : [0.004559], 'Income' : [0.013544], 'Employment' : [0.006309], 'Industry' : [0.026733], 'Sales' : [0.011429]};
-	const input_df = pandas.DataFrame(input)
+	const input_df = pd.DataFrame(input)
         const result = model.predict(input_df);
         alert(result)
 	}
