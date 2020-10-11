@@ -132,7 +132,7 @@
         const MODEL_URL = 'https://rrsguim.github.io/TL4BC/model.json';
         const model = await tf.loadLayersModel(MODEL_URL);
         console.log(model.summary());
-    	const input = tf.tensor3d([-9.02290123e-02,  6.03514522e-01, -1.99481102e-01, 1.06380982e+00,  1.93880125e-01],[1,5,1]);
+    	const input = tf.tensor3d([-9.02290123e-02,  6.03514522e-01, -1.99481102e-01, 1.06380982e+00,  1.93880125e-01],[5,1,1]);
         const result = model.predict(input);
         alert(result)
 	}
