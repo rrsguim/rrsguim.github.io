@@ -7,7 +7,6 @@
  * =============================================================================
  */
 
-header("Access-Control-Allow-Origin: *");
 
 async function run() {
    //Data
