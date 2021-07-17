@@ -47,12 +47,7 @@ console.log('ys shape', ys.shape[0],ys.shape[1]);
 async function getData() {	
    const csvUrl = document.getElementById("query-url").value	
 console.log('Data source:', csvUrl);
-	
-   const response = await getAssetFromKV(csvUrl);
-   response.headers.set("access-control-allow-origin", "*");
-   return response;
-	
-	
+		
    const csvDataset = tf.data.csv(
 	   csvUrl, {
          columnConfigs: {
