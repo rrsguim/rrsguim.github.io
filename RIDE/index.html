@@ -1,0 +1,230 @@
+<!--
+	
+RIDE - Representantion learning for interpolation, distribution and extrapolation of time series by related series.
+
+Copyright 2021 Rafael Guimaraes. All Rights Reserved.
+
+==============================================================================
+-->
+<html>
+
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-H0NW5Z2MYC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-H0NW5Z2MYC');
+  </script>
+        
+  <title>RIDE</title>
+  <meta name="description" content="Representantion learning for interpolation, distribution and extrapolation of time series by related series.">
+  <meta name="keywords" content="Transfer Learning, Machine Learning, TensorFlow.js">
+  <meta name="author" content="Rafael Guimaraes">
+
+  <meta name="viewport" content="initial-scale=1.5, maximum-scale=1.0, user-scalable=no" /> 
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.cyan-teal.min.css" />
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <link rel="stylesheet" href="./styles.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis@latest"></script>
+</head>
+
+
+<body>
+
+  <header>
+    <b>RIDE</b> 
+  </header>
+
+
+  <!-- Top -->
+  <div id="pacman-container">
+    <div id="logo">
+      <div id="logo-l">
+        <div id="logo-b">
+          <p id="copyright"><a style="color: white;">Use our data or enter the URL of your csv file below</a></p>
+          <textarea class="query" rows="1" cols="64" id="query-url">https://raw.githubusercontent.com/dldatasets/ride/main/RIDE_BR_GDP_data_long_to_js.csv</textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="controller-panels" id="controller" style="display:contests ">
+
+    <div class="panel training-panel">
+
+      <!-- Big buttons. -->
+      <div class="panel-row big-buttons">
+
+        <button id="predict" onclick="startRunning()">
+          <img width="66" height="66" src="./images/button.svg" />
+          <span>RUN MODEL</span>
+        </button>
+
+      </div><!-- /.panel-row -->
+
+     <div class="panel-row params-webcam-row"> 
+
+        <!-- Hyper params. -->
+        <div class="hyper-params">
+
+          <!-- Hidden units -->
+          <div class="dropdown">
+            <label>Hidden units</label>
+            <div class="select">
+              <select id="dense-units">
+                <option value="16">16</option>
+                <option value="32">32</option>
+                <option value="64">64</option>
+                <option selected value="128">128</option>
+                <option value="256">256</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Activation function -->
+          <div class="dropdown">
+            <label>Activation Function</label>
+            <div class="select">
+              <select id="activationFunction">
+                <option selected value="relu">ReLu</option>
+                <option value="tanh">Tanh</option>
+                <option value="sigmoid">Sigmoid</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Regularizer -->
+          <div class="dropdown">
+            <label>Regularizer</label>
+            <div class="select">
+              <select id="regularizer">
+                <option value="L1">L1</option>
+                <option selected value="L2">L2</option>
+                <option value="L1_L2">L1 and L2</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Regularizer lambda -->
+          <div class="dropdown">
+            <label>Lambda regularizer</label>
+            <div class="select">
+              <select id="regularizerLambda">
+                <option value="0.00001">0.00001</option>
+                <option value="0.0001">0.0001</option>
+                <option selected value="0.001">0.001</option>
+                <option value="0.01">0.01</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Optimizer -->
+          <div class="dropdown">
+            <label>Optimizer</label>
+            <div class="select">
+              <select id="optimizer">
+                <option selected value="adam">Adam</option>
+                <option value="adagrad">Adagrad</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Learning rate -->
+          <div class="dropdown">
+            <label>Learning rate</label>
+            <div class="select">
+              <select id="learningRate">
+                <option value="0.00001">0.00001</option>
+                <option value="0.0001">0.0001</option>
+                <option selected value="0.001">0.001</option>
+                <option value="0.01">0.01</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Batch size -->
+          <div class="dropdown">
+            <label>Batch size</label>
+            <div class="select">
+              <select id="batchSize">
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="500">500</option>
+                <option selected value="1">Full sample</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Epochs -->
+          <div class="dropdown">
+            <label>Epochs</label>
+            <div class="select">
+              <select id="epochs">
+                <option value="50">50</option>
+                <option selected value="100">100</option>
+                <option value="150">150</option>
+                <option value="300">300</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Validation Split -->
+          <div class="dropdown">
+            <label>Validation Split</label>
+            <div class="select">
+              <select id="validationSplit">
+                <option value="0.1">0.1</option>
+                <option value="0.2">0.2</option>
+                <option selected value="0.3">0.3</option>
+                <option value="0.4">0.4</option>
+              </select>
+            </div>
+          </div>
+
+        </div><!-- /.hyper-params -->
+
+      </div><!-- /.panel-row -->
+
+    </div><!-- /.panel -->
+
+        <div class="panel-cell panel-cell-left panel-cell-fill">
+          <p id="copyright"><a style="color: white;">Representantion learning for<br>Interpolation, Distribution and Extrapolation<br>of time series by related series (RIDE)<br></a></p>
+          <p class="help-text">
+            <br>
+            One of the empirical applications that I presented in my doctoral thesis<br>
+            <a style="color: royalblue;" href="https://github.com/rrsguim/PhD_Economics/blob/master/README.md" target="_blank" rel="noopener">Deep Learning Macroeconomics</a> is related to a common problem of<br>
+            transforming the frequency of a variable, such as when we want monthly<br> 
+            series from the quarterly gross domestic product (GDP).<br>
+            <br> 
+            I built this browser-based model to you observe the model in real-time<br> 
+            and, if you want, apply it to your data. This is an ongoing project, so don't<br>
+            hesitate to <a href="mailto:rrsguim@gmail.com">contact me</a> to comment on the results with your data or any<br>
+            other related issues. <a style="color: royalblue;" href="https://www.linkedin.com/in/rafael-rsguimaraes/" target="_blank" rel="noopener">Here is a tutorial video [to be done]</a>  on how to proceed.<br>
+            <br>
+          </p>
+        </div><!-- ./panel-cell -->
+
+  </div><!-- /#controller -->
+
+  
+
+  <footer>
+  <p id="copyright">Design inspired by <a style="color: #ef6c00;" href="https://github.com/tensorflow/tfjs-examples/tree/master/webcam-transfer-learning" target="_blank" rel="noopener">TensorFlow.js</a></p>
+  <p id="copyright">RIDE copyright <a style="color: royalblue;" href="https://www.linkedin.com/in/rafael-rsguimaraes/" target="_blank" rel="noopener">Rafael Guimaraes</a></p> 
+  </footer>
+  
+  
+</body>
+
+
+  <script src="index.js"></script>
+</html>
