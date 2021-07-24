@@ -197,8 +197,7 @@ function results(ys, ride) {
 	const label1 = 'TARGET'
 	const label2 = 'RIDE'		
 		
-	let original_data = { values: [user_data, ride_data], series: [label1, label2] }
-console.log(original_data);                                                                    // TODO ************************* download the results
+	let original_data = { values: [user_data, ride_data], series: [label1, label2] }                                                                 
 	// Render to visor
 	const surface = { name: 'RESULTS', tab: 'Results' };
 	tfvis.render.linechart(surface, original_data, 
@@ -206,7 +205,16 @@ console.log(original_data);                                                     
 	  width: 500, height: 450,                       
 	  xLabel: 'Time', yLabel: 'TARGET unit', 
 	  }
-    )
+    	)
+	
+	//results to csv
+	let csvContent = "data:text/csv;charset=utf-8,";
+	arr_ride.forEach(e => {
+	csvContent += e + "\r\n";
+	});
+	var encodeUri = encodeURI(csvContent);
+	//	window.open(encodeUri);
+console.log('Click to download a csv file with RIDE results:',encodeUri);
 }
 
 
